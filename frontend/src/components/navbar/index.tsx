@@ -2,12 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Navbar() {
     return (
-        <div className={"d-flex flex-row"}>
-            <nav className="navbar navbar-light bg-light w-100">
-                <FontAwesomeIcon className={"icon-color-secondary ms-sm-3"} icon={["fas","dollar-sign"]} />
-                <span className="navbar-brand mb-0 h1">Project Sales</span>
-            </nav>
-        </div>
+        <nav className="navbar navbar-dark bg-dark navbar-expand-sm sticky-top">
+            <div className={"container-fluid"}>
+                <div className={"row-cols-auto mx-auto float-lg-start"}>
+                    <FontAwesomeIcon className={"icon-color-secondary"} icon={["fas","dollar-sign"]} />
+                    <span className="navbar-brand h1 ms-2">Project Sales</span>
+                </div>
+            </div>
+        </nav>
     );
 }
 
