@@ -1,6 +1,8 @@
 package com.andrelake.projectsales.services;
 
 import com.andrelake.projectsales.dto.SaleDTO;
+import com.andrelake.projectsales.dto.SaleSuccessDTO;
+import com.andrelake.projectsales.dto.SaleSumDTO;
 import com.andrelake.projectsales.entities.Sale;
 import com.andrelake.projectsales.repositories.SaleRepository;
 import com.andrelake.projectsales.repositories.SellerRepository;
@@ -28,5 +30,15 @@ public class SaleService {
         Page<Sale> result = repository.findAll(pageable);
 
         return result.map(sale -> new SaleDTO(sale));
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSumDTO> amountGroupBySeller() {
+        return repository.amountGroupBySeller();
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSuccessDTO> successTaxGroupBySeller() {
+        return repository.successTaxGroupBySeller();
     }
 }

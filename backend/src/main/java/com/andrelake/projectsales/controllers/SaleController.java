@@ -1,6 +1,8 @@
 package com.andrelake.projectsales.controllers;
 
 import com.andrelake.projectsales.dto.SaleDTO;
+import com.andrelake.projectsales.dto.SaleSuccessDTO;
+import com.andrelake.projectsales.dto.SaleSumDTO;
 import com.andrelake.projectsales.dto.SellerDTO;
 import com.andrelake.projectsales.services.SaleService;
 import com.andrelake.projectsales.services.SellerService;
@@ -25,6 +27,18 @@ public class SaleController {
     public ResponseEntity<Page<SaleDTO>> findAll(Pageable pageable) {
         Page<SaleDTO> list = service.findAll(pageable);
 
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/amount-by-seller")
+    public ResponseEntity<List<SaleSumDTO>> amountGroupedBySeller() {
+        List<SaleSumDTO> list = service.amountGroupBySeller();
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/success-tax-by-seller")
+    public ResponseEntity<List<SaleSuccessDTO>> successTaxGroupBySeller() {
+        List<SaleSuccessDTO> list = service.successTaxGroupBySeller();
         return ResponseEntity.ok(list);
     }
 }
