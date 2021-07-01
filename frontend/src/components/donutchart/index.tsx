@@ -2,6 +2,7 @@ import Chart from 'react-apexcharts'
 import axios from "axios";
 import {BASE_URL} from "../../utils/requests";
 import {SaleSum} from "../../types/sale";
+import {useEffect, useState} from "react";
 
 type ChartData = {
     labels: string[],
@@ -9,32 +10,32 @@ type ChartData = {
 }
 
 function DonutChart() {
-    //forma paia
-    let chartData: ChartData = { labels: [], series: [] }
-    axios.get(`${BASE_URL}/sales/amount-by-seller`)
-        .then(res => {
-            const data = res.data as SaleSum[]
-            const labelList = data.map(x => x.sellerName)
-            const sumList = data.map(x => x.sum)
 
-            chartData = {
-                labels: labelList,
-                series: sumList
-            }
+    const [chartData, setChartData] = useState<ChartData>(
+        { labels: [], series: [] }
+    );
 
-            console.log(chartData)
-        })
+    useEffect(() => {
+        axios.get(`${BASE_URL}/sales/amount-by-seller`)
+            .then(res => {
+                const data = res.data as SaleSum[]
+                const labelList = data.map(x => x.sellerName)
+                const sumList = data.map(x => x.sum)
+
+                setChartData ({
+                    labels: labelList,
+                    series: sumList
+                })
+
+                console.log(chartData)
+            })
+    }, [])
 
     const options = {
         legend: {
             show: true
         }
     };
-
-    // const data = {
-    //     labels: ['John Doe', 'Michael Jordan'],
-    //     series: [30.3, 25.2]
-    // };
 
     return (
         <div className="app">
