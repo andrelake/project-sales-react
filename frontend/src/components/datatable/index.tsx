@@ -1,4 +1,26 @@
+import {useEffect, useState} from "react";
+import {SalePage} from "../../types/sale";
+import axios from "axios";
+import {BASE_URL} from "../../utils/requests";
+import {formatDate} from "../../utils/format";
+
 function DataTable() {
+
+    const [page, setPage] = useState<SalePage>({
+        first: true,
+        last: true,
+        number: 0,
+        totalElements: 0,
+        totalPages: 0
+    })
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/sales?page=0&size=10&sort=date,desc`)
+            .then(res => {
+                setPage(res.data)
+            })
+    }, [])
+
     return (
         <div className={"table-responsive mb-5"}>
             <table className={"table table-striped table-sm"}>
@@ -12,34 +34,17 @@ function DataTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>20/05/2021</td>
-                        <td>John Doe</td>
-                        <td>20</td>
-                        <td>13</td>
-                        <td>14230,40</td>
+                { page.content?.map(x => (
+                    <tr key={x.id}>
+                        <td>{formatDate(x.date, "dd/MM/yyyy")}</td>
+                        <td>{x.seller.name}</td>
+                        <td>{x.visited}</td>
+                        <td>{x.deals}</td>
+                        <td>{x.amount.toFixed(2)}</td>
                     </tr>
-                    <tr>
-                        <td>20/05/2021</td>
-                        <td>John Doe</td>
-                        <td>20</td>
-                        <td>13</td>
-                        <td>14230,40</td>
-                    </tr>
-                    <tr>
-                        <td>20/05/2021</td>
-                        <td>John Doe</td>
-                        <td>20</td>
-                        <td>13</td>
-                        <td>14230,40</td>
-                    </tr>
-                    <tr>
-                        <td>20/05/2021</td>
-                        <td>John Doe</td>
-                        <td>20</td>
-                        <td>13</td>
-                        <td>14230,40</td>
-                    </tr>
+                ))}
+
+
                 </tbody>
             </table>
 
