@@ -26,10 +26,8 @@ function DonutChart() {
                     labels: labelList,
                     series: sumList
                 })
-
-                console.log(chartData)
             })
-    }, [])
+    }, [chartData])
 
     const options = {
         legend: {
