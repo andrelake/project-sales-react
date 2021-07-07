@@ -55,7 +55,7 @@ function BarChart() {
     const options = {
         plotOptions: {
             bar: {
-                horizontal: false,
+                horizontal: true,
                 columnWidth: '40%',
             }
         }

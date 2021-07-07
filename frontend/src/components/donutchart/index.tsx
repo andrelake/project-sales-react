@@ -41,7 +41,7 @@ function DonutChart() {
                 <Chart
                     options={{...options, labels: chartData.labels}}
                     series={chartData.series}
-                    type="donut"
+                    type="polarArea"
                     width="500"
                 />
             </div>

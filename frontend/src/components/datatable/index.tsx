@@ -32,7 +32,7 @@ function DataTable() {
         <>
             <Pagination page={page} onPageChange={onPageChange}></Pagination>
             <div className={"table-responsive mb-5"}>
-                <table className={"table table-striped table-sm"}>
+                <table className={"table table-striped table-sm table-dark"}>
                     <thead>
                         <tr>
                             <th>Date</th>
